@@ -1,1 +1,2 @@
-console.log(THREE);
+/// elements
+const canvasEl = document.querySelector('.webgl');
