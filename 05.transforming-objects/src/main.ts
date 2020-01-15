@@ -22,6 +22,10 @@ scene.add(mesh);
 // console.log(mesh.position.length());
 // -length;
 
+// Axes Helper
+const axesHelper = new THREE.AxesHelper(3);
+scene.add(axesHelper);
+
 // Sizes
 const sizes = {
   width: 800,
@@ -30,7 +34,9 @@ const sizes = {
 
 // Camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height);
-camera.position.z = 3;
+camera.position.z = 4;
+camera.position.y = 0.5;
+camera.position.x = 0.5;
 
 scene.add(camera);
 
