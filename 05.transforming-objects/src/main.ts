@@ -12,6 +12,8 @@ const material = new THREE.MeshBasicMaterial({ color: '#ff0000' });
 const mesh = new THREE.Mesh(geometry, material);
 
 scene.add(mesh);
+
+/// -> Positioning
 // mesh.position.normalize();
 // console.log(mesh.position.length());
 // -length;
@@ -20,10 +22,16 @@ scene.add(mesh);
 // mesh.position.z = -2;
 mesh.position.set(0.7, -0.6, 1);
 
+/// -> Scaling
 // mesh.scale.x = 2;
 // mesh.scale.y = 0.5;
 // mesh.scale.z = 0.5;
 mesh.scale.set(2, 0.5, 0.75);
+
+/// -> Rotation
+mesh.rotation.reorder('YXZ');
+mesh.rotation.y = Math.PI * 0.75;
+mesh.rotation.x = Math.PI * 0.25;
 
 // Axes Helper
 const axesHelper = new THREE.AxesHelper(3);
