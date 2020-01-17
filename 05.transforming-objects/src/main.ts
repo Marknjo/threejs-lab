@@ -51,6 +51,8 @@ camera.position.x = 0.5;
 
 scene.add(camera);
 
+camera.lookAt(mesh.position);
+
 console.log(mesh.position.distanceTo(camera.position));
 
 // Renderer
