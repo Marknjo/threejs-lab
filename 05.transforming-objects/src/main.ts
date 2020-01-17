@@ -11,16 +11,19 @@ const geometry = new THREE.BoxGeometry(1, 1, 1);
 const material = new THREE.MeshBasicMaterial({ color: '#ff0000' });
 const mesh = new THREE.Mesh(geometry, material);
 
+scene.add(mesh);
+// mesh.position.normalize();
+// console.log(mesh.position.length());
+// -length;
 // mesh.position.x = 0.7;
 // mesh.position.y = -0.6;
 // mesh.position.z = -2;
 mesh.position.set(0.7, -0.6, 1);
 
-scene.add(mesh);
-
-// mesh.position.normalize();
-// console.log(mesh.position.length());
-// -length;
+// mesh.scale.x = 2;
+// mesh.scale.y = 0.5;
+// mesh.scale.z = 0.5;
+mesh.scale.set(2, 0.5, 0.75);
 
 // Axes Helper
 const axesHelper = new THREE.AxesHelper(3);
