@@ -26,6 +26,20 @@ camera.position.z = 3;
 
 scene.add(camera);
 
+// Handle auto resize of the canvas in the viewport
+window.addEventListener('resize', () => {
+  // update sizes
+  sizes.width = window.innerWidth;
+  sizes.height = window.innerHeight;
+
+  // update camera
+  camera.aspect = sizes.width / sizes.height;
+  camera.updateProjectionMatrix();
+
+  // update renderer
+  renderer.setSize(sizes.width, sizes.height);
+});
+
 /**
  * Controls
  */
