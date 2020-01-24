@@ -41,6 +41,15 @@ window.addEventListener('resize', () => {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 });
 
+// handle fullscreen
+window.addEventListener('dblclick', () => {
+  if (!document.fullscreenElement) {
+    canvasEl.requestFullscreen();
+  } else {
+    document.exitFullscreen();
+  }
+});
+
 /**
  * Controls
  */
@@ -55,8 +64,6 @@ const renderer = new THREE.WebGLRenderer({
 
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-console.log(window.devicePixelRatio);
 
 /**
  * Animation
