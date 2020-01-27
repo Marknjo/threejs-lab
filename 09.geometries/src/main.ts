@@ -9,7 +9,18 @@ const scene = new THREE.Scene();
 
 // Mesh
 const count = 50;
-const positionsArray = new Float32Array([0, 0, 0, 0, 1, 0, 1, 0, 0]);
+
+/// Basic triangle geometry
+// const positionsArray = new Float32Array([0, 0, 0, 0, 1, 0, 1, 0, 0]);
+// const positionsAttribute = new THREE.BufferAttribute(positionsArray, 3);
+// const geometry = new THREE.BufferGeometry();
+// geometry.setAttribute('position', positionsAttribute);
+
+const positionsArray = new Float32Array(count * 3 * 3);
+
+for (let i = 0; i <= 50 * 3 * 3; i++) {
+  positionsArray[i] = (Math.random() - 0.5) * 4;
+}
 
 const positionsAttribute = new THREE.BufferAttribute(positionsArray, 3);
 
