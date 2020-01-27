@@ -8,7 +8,15 @@ const canvasEl = document.querySelector('.webgl')! as HTMLCanvasElement;
 const scene = new THREE.Scene();
 
 // Mesh
-const geometry = new THREE.BoxGeometry(1, 1, 1, 2, 2, 2);
+const count = 50;
+const positionsArray = new Float32Array([0, 0, 0, 0, 1, 0, 1, 0, 0]);
+
+const positionsAttribute = new THREE.BufferAttribute(positionsArray, 3);
+
+const geometry = new THREE.BufferGeometry();
+geometry.setAttribute('position', positionsAttribute);
+
+// const geometry = new THREE.BoxGeometry(1, 1, 1, 2, 2, 2);
 const material = new THREE.MeshBasicMaterial({
   color: '#ff0000',
   wireframe: true,
