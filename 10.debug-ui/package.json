@@ -15,6 +15,7 @@
     "vite": "^4.4.5"
   },
   "dependencies": {
+    "gsap": "^3.12.2",
     "prettier": "^3.0.3",
     "three": "^0.155.0"
   }
