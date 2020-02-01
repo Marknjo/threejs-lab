@@ -2,6 +2,7 @@ import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import GUI from 'lil-gui'
+import { gsap } from 'gsap'
 
 /**
  * Canvas
@@ -14,6 +15,17 @@ const canvasEl = document.querySelector(
  * Debug
  */
 const gui = new GUI()
+
+function spin() {
+  gsap.to(mesh.rotation, {
+    duration: 1,
+    y: mesh.rotation.y + Math.PI * 0.5,
+  })
+}
+
+const guiParameters = {
+  spin,
+}
 
 // Scene
 const scene = new THREE.Scene()
@@ -40,6 +52,8 @@ gui.add(mesh, 'visible').name('Toggle Visibility')
 gui.add(material, 'wireframe').name('Show Wireframe')
 
 gui.addColor(material, 'color').name('Name')
+
+gui.add(guiParameters, 'spin').name('Spin Cube')
 
 // Sizes
 const sizes = {
