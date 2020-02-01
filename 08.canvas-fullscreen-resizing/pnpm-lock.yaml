@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  gsap:
+    specifier: ^3.12.2
+    version: 3.12.2
   three:
     specifier: ^0.155.0
     version: 0.155.0
@@ -13,6 +16,9 @@ devDependencies:
   '@types/three':
     specifier: ^0.155.1
     version: 0.155.1
+  prettier:
+    specifier: ^3.0.3
+    version: 3.0.3
   typescript:
     specifier: ^5.0.2
     version: 5.2.2
@@ -285,6 +291,10 @@ packages:
     dev: true
     optional: true
 
+  /gsap@3.12.2:
+    resolution: {integrity: sha512-EkYnpG8qHgYBFAwsgsGEqvT1WUidX0tt/ijepx7z8EUJHElykg91RvW1XbkT59T0gZzzszOpjQv7SE41XuIXyQ==}
+    dev: false
+
   /lil-gui@0.17.0:
     resolution: {integrity: sha512-MVBHmgY+uEbmJNApAaPbtvNh1RCAeMnKym82SBjtp5rODTYKWtM+MXHCifLe2H2Ti1HuBGBtK/5SyG4ShQ3pUQ==}
     dev: true
@@ -310,6 +320,12 @@ packages:
       nanoid: 3.3.6
       picocolors: 1.0.0
       source-map-js: 1.0.2
+    dev: true
+
+  /prettier@3.0.3:
+    resolution: {integrity: sha512-L/4pUDMxcNa8R/EthV08Zt42WBO4h1rarVtK0K+QJG0X187OLo7l699jWw0GKuwzkPQ//jMFA/8Xm6Fh3J/DAg==}
+    engines: {node: '>=14'}
+    hasBin: true
     dev: true
 
   /rollup@3.28.1:
