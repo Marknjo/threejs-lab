@@ -55,24 +55,33 @@ const textureLoader = new THREE.TextureLoader(
 const colorTexture = textureLoader.load(
   '/textures/door/color.jpg'
 )
-const alphaTexture = textureLoader.load(
-  '/textures/door/alpha.jpg'
-)
-const heightTexture = textureLoader.load(
-  '/textures/door/height.jpg'
-)
-const normalTexture = textureLoader.load(
-  '/textures/door/normal.jpg'
-)
-const ambientOcclusionTexture = textureLoader.load(
-  '/textures/door/ambientOcclusion.jpg'
-)
-const metalnessTexture = textureLoader.load(
-  '/textures/door/metalness.jpg'
-)
-const roughnessTexture = textureLoader.load(
-  '/textures/door/roughness.jpg'
-)
+// const alphaTexture = textureLoader.load(
+//   '/textures/door/alpha.jpg'
+// )
+// const heightTexture = textureLoader.load(
+//   '/textures/door/height.jpg'
+// )
+// const normalTexture = textureLoader.load(
+//   '/textures/door/normal.jpg'
+// )
+// const ambientOcclusionTexture = textureLoader.load(
+//   '/textures/door/ambientOcclusion.jpg'
+// )
+// const metalnessTexture = textureLoader.load(
+//   '/textures/door/metalness.jpg'
+// )
+// const roughnessTexture = textureLoader.load(
+//   '/textures/door/roughness.jpg'
+// )
+
+colorTexture.repeat.x = 2
+colorTexture.repeat.y = 3
+colorTexture.wrapS = THREE.MirroredRepeatWrapping
+colorTexture.wrapT = THREE.MirroredRepeatWrapping
+
+colorTexture.rotation = Math.PI * 0.25
+colorTexture.center.x = 0.5
+colorTexture.center.y = 0.5
 
 // Scene
 const scene = new THREE.Scene()
@@ -80,7 +89,7 @@ const scene = new THREE.Scene()
 // Mesh
 const geometry = new THREE.BoxGeometry(1, 1, 1)
 const material = new THREE.MeshBasicMaterial({
-  // color: '#ff0000',
+  color: '#ff0000',
   map: colorTexture!,
 })
 const mesh = new THREE.Mesh(geometry, material)
