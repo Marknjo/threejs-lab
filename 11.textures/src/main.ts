@@ -12,15 +12,28 @@ const canvasEl = document.querySelector(
 /**
  * Textures
  */
-const image = new Image()
+// const image = new Image()
 
-let texture = new THREE.Texture(image)
+// let texture = new THREE.Texture(image)
 
-image.onload = () => {
-  texture.needsUpdate = true
-}
+// image.onload = () => {
+//   texture.needsUpdate = true
+// }
 
-image.src = '/textures/door/color.jpg'
+// image.src = '/textures/door/color.jpg'
+const textureLoader = new THREE.TextureLoader()
+const texture = textureLoader.load(
+  '/textures/door/color.jpg',
+  () => {
+    console.log('load')
+  },
+  () => {
+    console.log('progress')
+  },
+  () => {
+    console.log('error')
+  }
+)
 
 // Scene
 const scene = new THREE.Scene()
