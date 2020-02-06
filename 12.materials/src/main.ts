@@ -10,8 +10,52 @@ const canvasEl = document.querySelector(
 )! as HTMLCanvasElement
 
 /**
- *
+ * Textures
  */
+const loaderManager = new THREE.LoadingManager()
+
+loaderManager.onLoad = () => {
+  console.log('Texture loaded')
+}
+
+loaderManager.onError = () => {
+  console.error('Error loading texture')
+}
+
+const textureLoader = new THREE.TextureLoader(loaderManager)
+
+const doorColorTexture = textureLoader.load(
+  'textures/door/color.jpg'
+)
+const doorAlpahTexture = textureLoader.load(
+  'textures/door/alpha.jpg'
+)
+const alpahTexture = textureLoader.load(
+  'textures/door/color.jpg'
+)
+const doorAmbientOcclusionTexture = textureLoader.load(
+  'textures/door/ambientOcclusion.jpg'
+)
+const doorHeightTexture = textureLoader.load(
+  'textures/door/height.jpg'
+)
+const doorMetalnessTexture = textureLoader.load(
+  'textures/door/metalness.jpg'
+)
+const doornNormalTexture = textureLoader.load(
+  'textures/door/normal.jpg'
+)
+const doorRoughnessTexture = textureLoader.load(
+  'textures/door/roughness.jpg'
+)
+
+const metacap01Texture = textureLoader.load(
+  'textures/metacaps/1.jpg'
+)
+
+const gradient03Texture = textureLoader.load(
+  'textures/gradients/3.jpg'
+)
 
 // Scene
 const scene = new THREE.Scene()
@@ -21,6 +65,7 @@ const scene = new THREE.Scene()
  */
 const material = new THREE.MeshBasicMaterial({
   color: 0xff0000,
+  map: doorColorTexture,
 })
 
 const sphere = new THREE.Mesh(
