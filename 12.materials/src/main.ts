@@ -49,8 +49,8 @@ const doorRoughnessTexture = textureLoader.load(
   'textures/door/roughness.jpg'
 )
 
-const metacap01Texture = textureLoader.load(
-  'textures/metacaps/1.jpg'
+const matcap01Texture = textureLoader.load(
+  'textures/matcaps/8.png'
 )
 
 const gradient03Texture = textureLoader.load(
@@ -75,8 +75,12 @@ const scene = new THREE.Scene()
 // material.alphaMap = doorAlphaTexture
 // material.side = THREE.DoubleSide
 
-const material = new THREE.MeshNormalMaterial()
-material.flatShading = true
+// const material = new THREE.MeshNormalMaterial()
+// material.flatShading = true
+
+const material = new THREE.MeshMatcapMaterial()
+material.matcap = matcap01Texture
+// material.flatShading = true
 
 const sphere = new THREE.Mesh(
   new THREE.SphereGeometry(0.5, 16, 16),
