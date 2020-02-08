@@ -1,6 +1,7 @@
 import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
+import GUI from 'lil-gui'
 
 /**
  * Canvas
@@ -8,6 +9,11 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 const canvasEl = document.querySelector(
   '.webgl'
 )! as HTMLCanvasElement
+
+/**
+ * Debug
+ */
+const gui = new GUI()
 
 /**
  * Textures
@@ -91,8 +97,27 @@ const scene = new THREE.Scene()
 // material.shininess = 100
 // material.specular = new THREE.Color(0xff0000)
 
-const material = new THREE.MeshToonMaterial()
-material.gradientMap = gradient03Texture
+// const material = new THREE.MeshToonMaterial()
+// material.gradientMap = gradient03Texture
+
+const material = new THREE.MeshStandardMaterial()
+material.metalness = 0.45
+material.roughness = 0.65
+
+// debug
+gui
+  .add(material, 'metalness')
+  .max(1)
+  .min(0)
+  .step(0.1)
+  .name('Metalness')
+
+gui
+  .add(material, 'roughness')
+  .max(1)
+  .min(0)
+  .step(0.1)
+  .name('Roughness')
 
 const sphere = new THREE.Mesh(
   new THREE.SphereGeometry(0.5, 16, 16),
@@ -175,7 +200,9 @@ const controls = new OrbitControls(camera, canvasEl)
 // controls.enabled = true;
 controls.enableDamping = true
 
-// Renderer
+/**
+ * Renderer
+ */
 const renderer = new THREE.WebGLRenderer({
   canvas: canvasEl,
 })
