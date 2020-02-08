@@ -54,8 +54,11 @@ const matcap01Texture = textureLoader.load(
 )
 
 const gradient03Texture = textureLoader.load(
-  'textures/gradients/3.jpg'
+  'textures/gradients/5.jpg'
 )
+gradient03Texture.magFilter = THREE.LinearFilter
+gradient03Texture.magFilter = THREE.NearestFilter
+gradient03Texture.generateMipmaps = false
 
 // Scene
 const scene = new THREE.Scene()
@@ -82,7 +85,14 @@ const scene = new THREE.Scene()
 // material.matcap = matcap01Texture
 // material.flatShading = true
 
-const material = new THREE.MeshDepthMaterial()
+// const material = new THREE.MeshDepthMaterial()
+// const material = new THREE.MeshLambertMaterial()
+// const material = new THREE.MeshPhongMaterial()
+// material.shininess = 100
+// material.specular = new THREE.Color(0xff0000)
+
+const material = new THREE.MeshToonMaterial()
+material.gradientMap = gradient03Texture
 
 const sphere = new THREE.Mesh(
   new THREE.SphereGeometry(0.5, 16, 16),
@@ -109,6 +119,19 @@ const sizes = {
   width: window.innerWidth,
   height: window.innerHeight,
 }
+
+/**
+ * Lights
+ */
+const ambientLight = new THREE.AmbientLight(0xffffff, 1)
+scene.add(ambientLight)
+
+const pointLight = new THREE.PointLight(0xffffff, 40)
+pointLight.position.x = 2
+pointLight.position.y = 2
+pointLight.position.z = 4
+
+scene.add(pointLight)
 
 // Camera
 const camera = new THREE.PerspectiveCamera(
