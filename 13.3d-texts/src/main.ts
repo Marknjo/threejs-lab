@@ -2,6 +2,7 @@ import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { FontLoader } from 'three/addons/loaders/FontLoader.js'
+import { TextGeometry } from 'three/addons/geometries/TextGeometry.js'
 
 /**
  * Canvas
@@ -13,31 +14,61 @@ const canvasEl = document.querySelector(
 // Scene
 const scene = new THREE.Scene()
 
+// Axis helper
+const axesHelper = new THREE.AxesHelper()
+scene.add(axesHelper)
+
 /**
  * Fonts
  */
-const fontLoadingManager = new THREE.LoadingManager()
+const fontLoader = new FontLoader()
 
-fontLoadingManager.onLoad = () => {
-  console.log('Font loaded')
-}
+fontLoader.load(
+  '/fonts/helvetiker_regular.typeface.json',
+  (font) => {
+    console.log('Font loaded 🚀🚀🚀')
 
-fontLoadingManager.onError = () => {
-  console.error('Error loading font 💥💥💥')
-}
+    const textGeometry = new TextGeometry(
+      'Hello Three.js',
+      {
+        font,
+        size: 0.5,
+        height: 0.2,
+        curveSegments: 5,
+        bevelEnabled: true,
+        bevelThickness: 0.02,
+        bevelSize: 0.025,
+        bevelOffset: 0,
+        bevelSegments: 4,
+      }
+    )
 
-const fontLoader = new FontLoader(fontLoadingManager)
+    // textGeometry.computeBoundingBox()
 
-fontLoader.load('/fonts/helvetiker_regular.typeface.json')
+    // textGeometry.translate(
+    //   -(textGeometry.boundingBox!.max.x - 0.025) * 0.5,
+    //   -(textGeometry.boundingBox!.max.y - 0.025) * 0.5,
+    //   -(textGeometry.boundingBox!.max.z - 0.025) * 0.5
+    // )
+
+    textGeometry.center()
+
+    const textMaterial = new THREE.MeshBasicMaterial()
+    textMaterial.wireframe = true
+    const text = new THREE.Mesh(textGeometry, textMaterial)
+
+    scene.add(text)
+  }
+)
 
 // Mesh
-const geometry = new THREE.BoxGeometry(1, 1, 1)
-const material = new THREE.MeshBasicMaterial({
-  color: '#ff0000',
-})
-const mesh = new THREE.Mesh(geometry, material)
+// const geometry = new THREE.BoxGeometry(1, 1, 1)
+// const material = new THREE.MeshBasicMaterial({
+//   color: '#ff0000',
+// })
+// const mesh = new THREE.Mesh(geometry, material)
 
-scene.add(mesh)
+// scene.add(mesh)
 
 // Sizes
 const sizes = {
