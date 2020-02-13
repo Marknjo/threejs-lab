@@ -19,6 +19,25 @@ const axesHelper = new THREE.AxesHelper()
 scene.add(axesHelper)
 
 /**
+ * Textures
+ */
+const loadingManager = new THREE.LoadingManager()
+
+loadingManager.onLoad = () => {
+  console.log('Texture loaded 🚀🚀🚀')
+}
+
+loadingManager.onError = () => {
+  console.error('Failed to load texture 💥💥💥')
+}
+
+const textureLoader = new THREE.TextureLoader(
+  loadingManager
+)
+
+const matcapTexture = textureLoader.load('/matcaps/1.png')
+
+/**
  * Fonts
  */
 const fontLoader = new FontLoader()
@@ -53,8 +72,11 @@ fontLoader.load(
 
     textGeometry.center()
 
-    const textMaterial = new THREE.MeshBasicMaterial()
-    textMaterial.wireframe = true
+    const textMaterial = new THREE.MeshMatcapMaterial()
+
+    // Load matcap
+    textMaterial.matcap = matcapTexture
+
     const text = new THREE.Mesh(textGeometry, textMaterial)
 
     scene.add(text)
