@@ -72,13 +72,42 @@ fontLoader.load(
 
     textGeometry.center()
 
-    const textMaterial = new THREE.MeshMatcapMaterial()
+    const material = new THREE.MeshMatcapMaterial()
 
     // Load matcap
-    textMaterial.matcap = matcapTexture
+    material.matcap = matcapTexture
 
-    const text = new THREE.Mesh(textGeometry, textMaterial)
+    const text = new THREE.Mesh(textGeometry, material)
 
+    // load donuts
+    console.time('Loading Donuts')
+
+    const totalDonuts = 100
+
+    for (let i = 0; i <= totalDonuts; i++) {
+      const donutMesh = new THREE.Mesh(
+        new THREE.TorusGeometry(0.3, 0.2, 16, 32),
+        material
+      )
+
+      // position
+      donutMesh.position.x = (Math.random() - 0.5) * 10
+      donutMesh.position.y = (Math.random() - 0.5) * 10
+      donutMesh.position.z = (Math.random() - 0.5) * 10
+
+      // rotate
+      donutMesh.rotation.x = Math.random() * Math.PI
+      donutMesh.rotation.y = Math.random() * Math.PI
+      donutMesh.rotation.z = Math.random() * Math.PI
+      // scale
+      const scale = Math.random()
+      donutMesh.scale.set(scale, scale, scale)
+
+      scene.add(donutMesh)
+    }
+
+    console.timeEnd('Loading Donuts')
+    // add meshes
     scene.add(text)
   }
 )
