@@ -4,6 +4,8 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { FontLoader } from 'three/addons/loaders/FontLoader.js'
 import { TextGeometry } from 'three/addons/geometries/TextGeometry.js'
 
+import GUI from 'lil-gui'
+
 /**
  * Canvas
  */
@@ -11,12 +13,44 @@ const canvasEl = document.querySelector(
   '.webgl'
 )! as HTMLCanvasElement
 
-// Scene
+/**
+ * Scene
+ */
 const scene = new THREE.Scene()
 
+/**
+ * Debug
+ */
+const gui = new GUI()
+
+const properties = {
+  hideAxesHelper: (isShown: boolean = true) => {
+    isShown || axesHelper.dispose()
+    isShown || scene.remove(axesHelper)
+  },
+  selectMatcapTexture: {
+    1: '1',
+    2: '2',
+    3: '3',
+    4: '4',
+    5: '5',
+    6: '6',
+    7: '7',
+    8: '8',
+  },
+}
+
 // Axis helper
+
 const axesHelper = new THREE.AxesHelper()
 scene.add(axesHelper)
+
+properties.hideAxesHelper(true)
+
+gui
+  .add(properties, 'hideAxesHelper')
+  .onChange(() => properties.hideAxesHelper(false))
+  .name('Hide Axes Helper')
 
 /**
  * Textures
@@ -84,26 +118,29 @@ fontLoader.load(
 
     const totalDonuts = 100
 
+    const donutMesh = new THREE.TorusGeometry(
+      0.3,
+      0.2,
+      16,
+      32
+    )
     for (let i = 0; i <= totalDonuts; i++) {
-      const donutMesh = new THREE.Mesh(
-        new THREE.TorusGeometry(0.3, 0.2, 16, 32),
-        material
-      )
+      const donut = new THREE.Mesh(donutMesh, material)
 
       // position
-      donutMesh.position.x = (Math.random() - 0.5) * 10
-      donutMesh.position.y = (Math.random() - 0.5) * 10
-      donutMesh.position.z = (Math.random() - 0.5) * 10
+      donut.position.x = (Math.random() - 0.5) * 10
+      donut.position.y = (Math.random() - 0.5) * 10
+      donut.position.z = (Math.random() - 0.5) * 10
 
       // rotate
-      donutMesh.rotation.x = Math.random() * Math.PI
-      donutMesh.rotation.y = Math.random() * Math.PI
-      donutMesh.rotation.z = Math.random() * Math.PI
+      donut.rotation.x = Math.random() * Math.PI
+      donut.rotation.y = Math.random() * Math.PI
+      donut.rotation.z = Math.random() * Math.PI
       // scale
       const scale = Math.random()
-      donutMesh.scale.set(scale, scale, scale)
+      donut.scale.set(scale, scale, scale)
 
-      scene.add(donutMesh)
+      scene.add(donut)
     }
 
     console.timeEnd('Loading Donuts')
