@@ -28,16 +28,7 @@ const properties = {
     isShown || axesHelper.dispose()
     isShown || scene.remove(axesHelper)
   },
-  selectMatcapTexture: {
-    1: '1',
-    2: '2',
-    3: '3',
-    4: '4',
-    5: '5',
-    6: '6',
-    7: '7',
-    8: '8',
-  },
+  selectMatcapTexture: '1',
 }
 
 // Axis helper
@@ -55,21 +46,42 @@ gui
 /**
  * Textures
  */
-const loadingManager = new THREE.LoadingManager()
 
-loadingManager.onLoad = () => {
-  console.log('Texture loaded 🚀🚀🚀')
+const loadMatcapTexture = (
+  texture: string
+): THREE.Texture => {
+  const loadingManager = new THREE.LoadingManager()
+
+  loadingManager.onLoad = () => {
+    console.log('Texture loaded 🚀🚀🚀')
+  }
+
+  loadingManager.onError = () => {
+    console.error('Failed to load texture 💥💥💥')
+  }
+
+  const textureLoader = new THREE.TextureLoader(
+    loadingManager
+  )
+
+  return textureLoader.load(`/matcaps/${texture}.png`)
 }
 
-loadingManager.onError = () => {
-  console.error('Failed to load texture 💥💥💥')
-}
+let matcapTexture: THREE.Texture = loadMatcapTexture('1')
 
-const textureLoader = new THREE.TextureLoader(
-  loadingManager
-)
-
-const matcapTexture = textureLoader.load('/matcaps/1.png')
+gui
+  .add(properties, 'selectMatcapTexture')
+  .name('Select Matcap')
+  .options({
+    1: '1',
+    2: '2',
+    3: '3',
+    4: '4',
+    5: '5',
+    6: '6',
+    7: '7',
+    8: '8',
+  })
 
 /**
  * Fonts
@@ -221,6 +233,8 @@ const clock = new THREE.Clock()
 
 const tick = () => {
   const elapsedTime = clock.getElapsedTime()
+
+  // update mesh
 
   // update controls
   controls.update()
